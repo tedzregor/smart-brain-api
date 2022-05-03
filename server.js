@@ -14,14 +14,25 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+//localhost
+// const db = knex({
+//   client: 'pg',
+//   connection: {
+//     host : '127.0.0.1',
+//     //port : 3306,
+//     user : 'ted',
+//     password : '061281',
+//     database : 'smartbrain'
+//   }
+// });
+
 const db = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    //port : 3306,
-    user : 'ted',
-    password : '061281',
-    database : 'smartbrain'
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 });
 
